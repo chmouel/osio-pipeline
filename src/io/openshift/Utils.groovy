@@ -23,6 +23,7 @@ class Utils {
       def resourceFile = ".openshiftio/.tmp-${namespace}-${buildNum}-${kind}.yaml"
       script.writeYaml file: resourceFile, data: r
       script.sh """
+        cat ${resourceFile}
         oc apply -f ${resourceFile} -n ${namespace}
         rm -f ${resourceFile}
       """
